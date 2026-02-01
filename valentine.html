@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Comic Sans MS', cursive;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 25px;
+      text-align: center;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #ff6f91;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      width: 130px;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      background: #ff2f5b;
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #ffd6e0;
+      color: #ff4d6d;
+      position: relative;
+    }
+
+    .message {
+      font-size: 1.6rem;
+      color: #ff4d6d;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      animation: float 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile extra polish */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎶 Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="H.E.R. - Best Part (Lyrics) Ft. Daniel Caesar.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h1>My Love Love 💕</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div class="message" id="loveMessage">
+      Yay!! 💘 I love you forever 😘
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("loveMessage");
+    const music = document.getElementById("bgMusic");
+
+    // Start music on first interaction (mobile-friendly)
+    document.body.addEventListener("click", () => {
+      music.play();
+    }, { once: true });
+
+    noBtn.addEventListener("touchstart", moveNo);
+    noBtn.addEventListener("mouseover", moveNo);
+
+    function moveNo() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      createHearts();
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-20px";
+        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
